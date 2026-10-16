@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Rueda de la Vida · Autoevaluación</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#0A0A0C;--bg2:#18181D;--ink:#F3F2EE;--muted:#C4C4CA;--line:#9A9AA2;--grid:rgba(243,242,238,.16);--glass:linear-gradient(150deg,rgba(255,255,255,.14),rgba(255,255,255,.04));--glass-b:rgba(28,28,32,.97);--rim:rgba(255,255,255,.18);--spec:rgba(255,255,255,.1);--chip:rgba(255,255,255,.06);--btn:#E8C26A;--onbtn:#15110A;--edge:#F3D486;--focus:#FFFFFF;--errc:#FFA5A5;--orb:.14;--glowc:245,200,100;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg1:#EDEDEF;--bg2:#DADADF;--ink:#16161A;--muted:#4D4D55;--line:#6B6B73;--grid:rgba(22,22,26,.2);--glass:linear-gradient(150deg,rgba(255,255,255,.75),rgba(255,255,255,.4));--glass-b:rgba(255,255,255,.96);--rim:rgba(255,255,255,.9);--spec:rgba(255,255,255,.6);--chip:rgba(255,255,255,.6);--btn:#1F1F24;--onbtn:#F7E7B0;--edge:#8A6410;--focus:#4F3FCB;--errc:#A61E3A;--orb:.3;--glowc:214,164,52;color-scheme:light}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 8px)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;min-height:100vh;color:var(--ink);background:linear-gradient(160deg,var(--bg1),var(--bg2));font:400 1rem/1.7 Poppins,system-ui,-apple-system,"Segoe UI",sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg1)}
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.bg i{position:absolute;width:46vmax;height:46vmax;border-radius:50%;filter:blur(80px);opacity:var(--orb)}
+.bg i:nth-child(1){background:#E8C26A;top:-14vmax;left:-12vmax}
+.bg i:nth-child(2){background:#8C8C96;bottom:-16vmax;right:-10vmax}
+.bg i:nth-child(3){background:#F3D486;top:34%;left:46%;width:32vmax;height:32vmax;opacity:calc(var(--orb)*.75)}
+@media (prefers-reduced-motion:no-preference){.bg i{animation:drift 36s ease-in-out infinite alternate}.bg i:nth-child(2){animation-duration:44s}.bg i:nth-child(3){animation-duration:52s}@keyframes drift{to{transform:translate(6vmax,4vmax) scale(1.08)}}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:0}.skip:focus{left:12px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:20;background:var(--btn);color:var(--onbtn);padding:10px 16px;border-radius:12px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;font-weight:500;line-height:1.2;margin:0 0 .5rem}
+h1{font-size:clamp(2rem,6.8vw,3.1rem);font-weight:700;letter-spacing:-.015em;text-shadow:0 0 28px rgba(var(--glowc),.35)}h2{font-size:1.6rem}h3{font-size:1.35rem;margin-top:1.4rem}
+h2:focus{outline:none}
+.wrap{max-width:1080px;margin:0 auto;padding:28px 16px 56px}
+header{text-align:center;margin-bottom:24px}
+.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.78rem;color:var(--muted);margin:0 0 6px}
+.lead{max-width:36em;margin:0 auto;color:var(--muted)}
+.mut{color:var(--muted)}
+.glass{position:relative;isolation:isolate;background:var(--glass);-webkit-backdrop-filter:blur(30px) saturate(1.8);backdrop-filter:blur(30px) saturate(1.8);border:1px solid var(--rim);border-radius:32px;padding:22px;box-shadow:inset 0 1.5px 0 var(--rim),inset 0 -1px 0 rgba(255,255,255,.2),0 1px 2px rgba(23,48,63,.08),0 26px 56px -24px rgba(0,0,0,.6),0 0 46px rgba(var(--glowc),.07)}
+.glass::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(120% 65% at 12% 0%,var(--spec),rgba(255,255,255,0) 60%)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.glass{background:var(--glass-b)}}
+@media (prefers-contrast:more),(prefers-reduced-transparency:reduce){.glass{background:var(--glass-b);-webkit-backdrop-filter:none;backdrop-filter:none}}
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);align-items:start}
+.wheelbox{position:sticky;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:2;padding:12px 16px}
+.wheelbox svg.compact{height:26vh;width:100%}
+.cap{text-align:center;margin:4px 0 0;font-weight:500;min-height:1.65em}
+@media(min-width:900px){.grid{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}.wheelbox{top:16px;padding:22px}.wheelbox svg{height:auto}}
+[hidden]{display:none!important}
+svg{display:block;width:100%;max-width:100%;margin:0 auto}
+svg .lb{font:500 13px Poppins,system-ui,sans-serif;fill:var(--ink)}
+svg .v{font-weight:600;fill:var(--muted)}
+svg path.act{fill-opacity:1;stroke:#FFF3C4;stroke-width:2.2}
+fieldset{border:0;margin:0;padding:16px 0 18px;border-top:1px solid var(--rim);min-width:0}
+fieldset[data-miss]{border-left:4px solid var(--errc);padding-left:12px}
+legend{display:flex;align-items:center;gap:10px;width:100%;padding:0 0 10px;font-weight:600;font-size:1.1rem}
+.dot{width:12px;height:12px;border-radius:50%;flex:none;box-shadow:0 0 0 3px var(--rim)}
+.err{display:none;margin-left:auto;font-size:.88rem;color:var(--errc)}[data-miss] .err{display:inline}
+.nums{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+@media(min-width:420px){.nums{grid-template-columns:repeat(10,1fr);gap:6px}}
+@media(max-width:419px){.nums label{min-height:48px}}
+.nums input{position:absolute;opacity:0;pointer-events:none}
+.nums label{display:flex;align-items:center;justify-content:center;min-height:46px;min-width:0;border:1.5px solid var(--line);border-radius:14px;background:var(--chip);cursor:pointer;font-weight:600;transition:background .25s,color .25s,box-shadow .25s,border-color .25s}
+.nums label:hover{border-color:var(--btn)}
+.nums input:checked+label{background:var(--btn);border-color:var(--btn);color:var(--onbtn);box-shadow:0 0 18px rgba(var(--glowc),.55)}
+.nums input:focus-visible+label,.pk input:focus-visible+label{outline:3px solid var(--focus);outline-offset:3px}
+.nm{margin:6px 0 4px}.nm label{display:block;font-weight:500;margin-bottom:4px}
+input[type=text]{width:100%;min-height:48px;border:1.5px solid var(--line);border-radius:14px;padding:8px 14px;background:var(--chip);color:var(--ink);font:inherit}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--rim);padding-top:18px}
+.btn{min-height:48px;padding:.6rem 1.6rem;border-radius:999px;border:1.5px solid var(--btn);background:var(--btn);color:var(--onbtn);font:600 1rem/1.3 Poppins,system-ui,sans-serif;cursor:pointer;transition:opacity .25s,box-shadow .25s;box-shadow:0 0 26px rgba(var(--glowc),.35)}
+.btn:hover{opacity:.9}
+.btn.ghost,.btn[aria-disabled=true]{background:transparent;color:var(--ink);border-color:var(--line);box-shadow:none}
+.errmsg{color:var(--errc);font-weight:600;margin:10px 0 0;min-height:1.4em}
+.errmsg .btn{margin:.4rem 0 0 .5rem;min-height:44px;padding:.3rem 1.2rem;font-size:.92rem}
+#result{max-width:760px;margin:0 auto}
+.rhd{text-align:center}.rhd p{margin:0}
+.rw{margin:8px auto}.rw svg{width:100%;max-width:520px;height:auto}
+.big{font-family:"Playfair Display",Georgia,serif;text-align:center;margin:6px 0}
+.big b{font-size:3.2rem;line-height:1;font-weight:700}.big span{color:var(--muted);font-size:1.1rem}
+#result>p{text-align:center;max-width:36em;margin-left:auto;margin-right:auto}
+.pk{margin:10px 0;position:relative}
+.pk input{position:absolute;opacity:0;pointer-events:none}
+.pk label{display:block;position:relative;padding:14px 14px 14px 54px;border:1.5px solid var(--line);border-radius:18px;background:var(--chip);cursor:pointer;transition:box-shadow .25s,border-color .25s}
+.pk label::before{content:"";position:absolute;left:16px;top:16px;width:22px;height:22px;border:2px solid var(--line);border-radius:7px}
+.pk input:checked+label{border-color:var(--btn);box-shadow:0 0 22px rgba(var(--glowc),.4)}
+.pk input:checked+label::before{background:var(--btn);border-color:var(--btn)}
+.pk input:checked+label::after{content:"";position:absolute;left:25px;top:20px;width:6px;height:12px;border:solid var(--onbtn);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.pk input:disabled+label{opacity:.65;cursor:not-allowed}
+.top{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.n{font-weight:600;font-size:1.1rem}.s{margin-left:auto;font-weight:600}
+.tag{font-size:.82rem;padding:1px 10px;border-radius:999px;border:1px solid var(--btn)}
+.q{display:block;font-family:"Playfair Display",Georgia,serif;color:var(--muted);font-style:italic;margin-top:2px}
+.act{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:20px}
+#raw{width:100%;margin-top:10px;min-height:150px;border-radius:14px;border:1.5px solid var(--line);background:var(--chip);color:var(--ink);font:inherit;padding:10px}
+footer{text-align:center;color:var(--muted);font-size:.92rem;margin:26px auto 0;max-width:42em}
+@media print{:root{--ink:#000;--muted:#222;--line:#555;--grid:rgba(0,0,0,.25);--chip:#fff;--edge:#000}body,body::before{background:#fff}.bg,.skip,.act,#scoring,.lead,.eyebrow,.noprint{display:none!important}.glass{background:#fff;box-shadow:none;border:0;-webkit-backdrop-filter:none;backdrop-filter:none}.glass::before{display:none}h1{text-shadow:none}svg{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<a class="skip" href="#form">Saltar al formulario</a>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<main class="wrap">
+<header>
+  <p class="eyebrow">Autoevaluación para tu sesión de coaching</p>
+  <h1>La Rueda de la Vida</h1>
+  <p class="lead">Para cada área, elige el número que mejor refleje qué tan satisfecho/a estás hoy. No hay respuestas correctas: responde con lo primero que sientas y mira cómo se va formando tu rueda.</p>
+</header>
+
+<div id="scoring" class="grid">
+  <section class="glass wheelbox" aria-labelledby="wt">
+    <h2 id="wt" class="sr">Tu rueda en construcción</h2>
+    <div id="w1"></div>
+    <p id="cap" class="cap" aria-live="polite">Elige un número y tu rueda empezará a formarse.</p>
+  </section>
+  <form id="form" class="glass" novalidate aria-labelledby="ft">
+    <h2 id="ft" tabindex="-1">Tus puntajes</h2>
+    <div class="nm"><label for="nombre">Tu nombre (opcional)</label><input type="text" id="nombre" maxlength="40" autocomplete="given-name"></div>
+    <p id="scale" class="mut">Escala del 1 al 10: 1 significa satisfacción muy baja y 10 significa satisfacción plena.</p>
+    <div id="fields"></div>
+    <div class="bar">
+      <span id="cnt" class="mut">0 de 8 respondidas</span>
+      <button class="btn" id="go" type="button" aria-disabled="true" aria-describedby="cnt">Ver mi resultado</button>
+    </div>
+    <p id="err" class="errmsg" role="alert"></p>
+  </form>
+</div>
+
+<section id="result" class="glass" hidden aria-labelledby="rt"></section>
+<footer>Esta autoevaluación es un punto de partida para la conversación en tu sesión; no es un diagnóstico. Tus respuestas no se guardan: quedan solo en esta pantalla.</footer>
+</main>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const AREAS=['Desarrollo personal','Salud','Relaciones de pareja','Economía','Ocio','Amistad','Familia','Trabajo o estudios'];
+const COL=Array(8).fill('#E8C26A');
+const Q=['¿Qué necesito para sentir que estoy evolucionando?','¿Cómo quiero sentirme físicamente? ¿Y emocionalmente?','¿Cómo quiero sentirme en mi relación de pareja?','¿Mis ingresos son los necesarios para lo que necesito en mi vida?','¿Qué lugar elijo que ocupe esta área en mi vida?','¿Con quién o quiénes quiero compartir los momentos de amistad?','¿Qué tipo de familia quiero tener en mi vida?','¿Las tareas que realizo habitualmente son las que quiero y elijo?'];
+const V=Array(8).fill(null);
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const mq=matchMedia('(max-width:899px)');
+let W1,W2,rt;
+
+function makeWheel(el,full,id){
+  const cx=240,cy=215,R=120,sec=Math.PI/4,rad=i=>-Math.PI/2+i*sec;
+  const P=(a,r)=>[cx+r*Math.cos(a),cy+r*Math.sin(a)];
+  const wp=(i,r)=>{r=Math.max(r,.01);const[a,b]=P(rad(i),r),[c,d]=P(rad(i+1),r);return `M${cx} ${cy}L${a.toFixed(1)} ${b.toFixed(1)}A${r.toFixed(1)} ${r.toFixed(1)} 0 0 1 ${c.toFixed(1)} ${d.toFixed(1)}Z`};
+  let g='';
+  for(let k=1;k<=10;k++)g+=`<circle cx="${cx}" cy="${cy}" r="${R*k/10}" fill="none" stroke="var(--grid)" stroke-width="${k==10?1.4:.7}"/>`;
+  for(let i=0;i<8;i++){const[x,y]=P(rad(i),R);g+=`<line x1="${cx}" y1="${cy}" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--grid)"/>`}
+  g+=`<g filter="url(#gl${id})">${AREAS.map((_,i)=>`<path fill="${COL[i]}" fill-opacity=".6" stroke="var(--edge)" stroke-width="1.5" d="${wp(i,0)}"/>`).join('')}</g>`;
+  if(full)AREAS.forEach((nm,i)=>{
+    const am=rad(i)+sec/2,c=Math.cos(am),s=Math.sin(am),[lx,ly]=P(am,R+14),lines=[];let cur='';
+    nm.split(' ').forEach(w=>{if((cur+' '+w).trim().length>13&&cur){lines.push(cur);cur=w}else cur=(cur+' '+w).trim()});lines.push(cur);
+    const L=lines.length+1,x=lx.toFixed(1),y0=(ly+(s<-.4?-(L-1)*16:s>.4?10:-(L-1)*8+4)).toFixed(1);
+    g+=`<text class="lb" x="${x}" y="${y0}" text-anchor="${c>.3?'start':c<-.3?'end':'middle'}">${lines.map((l,j)=>`<tspan x="${x}" dy="${j?16:0}">${l}</tspan>`).join('')}<tspan class="v" x="${x}" dy="16">–</tspan></text>`;
+  });
+  el.innerHTML=`<svg class="${full?'':'compact'}" viewBox="${full?'0 0 480 430':'112 87 256 256'}" role="img" aria-label=""><defs><filter id="gl${id}" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="3.5" result="b"/><feComponentTransfer in="b" result="b2"><feFuncA type="linear" slope=".7"/></feComponentTransfer><feMerge><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${g}</svg>`;
+  const svg=el.firstChild;
+  return {R,wp,svg,paths:[...svg.querySelectorAll('g path')],vt:[...svg.querySelectorAll('.v')],cur:Array(8).fill(0),raf:0,act:-1};
+}
+function setVals(W,instant){
+  cancelAnimationFrame(W.raf);
+  const from=W.cur.slice(),to=V.map(v=>v==null?0:W.R*v/10),t0=performance.now(),dur=(instant||reduce)?0:500;
+  const step=t=>{const p=dur?Math.min(1,(t-t0)/dur):1,e=1-Math.pow(1-p,3);
+    to.forEach((r,i)=>{W.cur[i]=from[i]+(r-from[i])*e;W.paths[i].setAttribute('d',W.wp(i,W.cur[i]))});
+    if(p<1)W.raf=requestAnimationFrame(step)};
+  step(t0);
+  W.vt.forEach((t,i)=>t.textContent=V[i]==null?'–':V[i]+'/10');
+  W.svg.setAttribute('aria-label','Rueda de la vida. '+AREAS.map((a,i)=>a+': '+(V[i]==null?'sin responder':V[i]+' de 10')).join('. ')+'.');
+  W.paths.forEach((p,i)=>p.classList.toggle('act',i===W.act));
+}
+function buildLive(){W1=makeWheel($('#w1'),!mq.matches,'a');setVals(W1,true)}
+mq.addEventListener('change',buildLive);
+
+$('#fields').innerHTML=AREAS.map((n,i)=>`<fieldset aria-describedby="scale"><legend><span class="dot" style="background:${COL[i]};color:${COL[i]}" aria-hidden="true"></span>${n}<span class="err">Falta elegir un número</span></legend><div class="nums">${[...Array(10)].map((_,k)=>`<input type="radio" name="a${i}" id="a${i}-${k+1}" value="${k+1}"><label for="a${i}-${k+1}">${k+1}<span class="sr"> de 10</span></label>`).join('')}</div></fieldset>`).join('');
+buildLive();
+
+$('#form').addEventListener('change',e=>{
+  const m=/^a(\d)$/.exec(e.target.name||'');if(!m)return;
+  const i=+m[1];V[i]=+e.target.value;e.target.closest('fieldset').removeAttribute('data-miss');
+  const d=V.filter(v=>v!=null).length;
+  W1.act=i;setVals(W1);
+  $('#cap').textContent=`${AREAS[i]}: ${V[i]} de 10 · ${d} de 8 respondidas`;
+  $('#cnt').textContent=`${d} de 8 respondidas`;
+  $('#go').setAttribute('aria-disabled',String(d<8));
+  $('#err').textContent='';
+});
+
+$('#form').addEventListener('submit',e=>e.preventDefault());
+$('#go').addEventListener('click',()=>{
+  const miss=V.map((v,i)=>v==null?i:-1).filter(i=>i>=0);
+  if(miss.length){
+    document.querySelectorAll('#fields fieldset').forEach((f,i)=>f.toggleAttribute('data-miss',miss.includes(i)));
+    $('#err').innerHTML=`Te falta elegir un número en: ${miss.map(i=>AREAS[i]).join(', ')}. <button type="button" class="btn ghost" id="gomiss" data-i="${miss[0]}">Ir a ${AREAS[miss[0]]}</button>`;
+    return;
+  }
+  showResult();
+});
+
+function summary(){
+  const name=$('#nombre').value.trim(),avg=(V.reduce((a,b)=>a+b,0)/8).toFixed(1).replace('.',','),ch=[...document.querySelectorAll('.pk input:checked')].map(c=>+c.value);
+  return `RUEDA DE LA VIDA${name?' — '+name:''} — ${new Date().toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'})}\nPromedio: ${avg}/10\n\nMis puntajes:\n`+AREAS.map((a,i)=>`- ${a}: ${V[i]}/10`).join('\n')+`\n\nÁreas que quiero trabajar en la sesión:\n`+(ch.length?ch.map(i=>`- ${AREAS[i]} (${V[i]}/10): ${Q[i]}`).join('\n'):'- (todavía no elegí ninguna)');
+}
+
+function showResult(){
+  const name=$('#nombre').value.trim(),fecha=new Date().toLocaleDateString('es-AR',{day:'numeric',month:'long',year:'numeric'});
+  const A=AREAS.map((n,i)=>({n,i,v:V[i]})),asc=[...A].sort((a,b)=>a.v-b.v||a.i-b.i);
+  const avg=V.reduce((a,b)=>a+b,0)/8,mx=Math.max(...V),mn=Math.min(...V),gap=mx-mn;
+  const names=t=>AREAS.filter((_,i)=>V[i]==t).join(' y ');
+  const sug=new Set(gap?asc.slice(0,3).map(a=>a.i):[]);
+  const msg=avg>=8?'Tu rueda gira con soltura: te sientes satisfecho/a en casi todas las áreas.':avg>=6?'Tu rueda avanza bien, con algunas áreas que merecen más atención.':avg>=4?'Tu rueda va con altibajos: es un buen momento para elegir en qué área enfocar tu energía.':'Tu rueda atraviesa un momento exigente. No hace falta cambiarlo todo: puedes empezar por una sola área.';
+  const bal=gap==0?'Tus áreas están perfectamente parejas.':gap>=5?`Hay ${gap} puntos de diferencia entre tu área más alta y la más baja. Una rueda así gira con sacudidas: equilibrarla puede importar más que subir el promedio.`:gap>=3?`Hay cierta desigualdad entre tus áreas (${gap} puntos de diferencia).`:'Tus áreas están bastante parejas.';
+  const r=$('#result');
+  r.innerHTML=`<div class="rhd"><h2 id="rt" tabindex="-1">Tu rueda hoy${name?', '+esc(name):''}</h2><p class="mut">${fecha}</p></div>
+<div id="rw" class="rw"></div>
+<p class="big"><b>${avg.toFixed(1).replace('.',',')}</b><span> / 10 de promedio</span></p>
+<p>${msg}</p><p class="mut">${bal}${gap?` Mayor satisfacción: ${names(mx)} (${mx}). Más para cuidar: ${names(mn)} (${mn}).`:''}</p>
+<h3>Por dónde empezar</h3>
+<p class="mut" style="text-align:left;margin-left:0">Las áreas con menor puntaje suelen ser un buen punto de partida, aunque lo más importante es lo que tú sientes que necesita atención. Marca hasta 3 áreas que quieras trabajar en tu sesión; tu coach te acompañará a decidir.</p>
+<fieldset class="pk-set" style="padding:0;border:0"><legend class="sr">Áreas para trabajar en la sesión (máximo 3), ordenadas de menor a mayor puntaje</legend>
+${asc.map(a=>`<div class="pk"><input type="checkbox" id="p${a.i}" value="${a.i}"><label for="p${a.i}"><span class="top"><span class="n">${a.n}</span>${sug.has(a.i)?'<span class="tag">Sugerida para empezar</span>':''}<span class="s">${a.v}<span aria-hidden="true">/10</span><span class="sr"> de 10</span></span></span><span class="q">${Q[a.i]}</span></label></div>`).join('')}</fieldset>
+<p id="pm" class="mut" role="status" style="text-align:left;margin-left:0">Aún no marcaste ninguna.</p>
+<div class="act">
+<button class="btn" id="copy" type="button">Copiar resumen para mi sesión</button>
+<button class="btn ghost" id="print" type="button">Imprimir o guardar como PDF</button>
+<button class="btn ghost" id="edit" type="button">Editar mis puntajes</button>
+<button class="btn ghost" id="redo" type="button">Borrar todo y empezar de nuevo</button>
+</div>
+<p id="cm" class="mut" role="status"></p>
+<textarea id="raw" hidden readonly aria-label="Resumen para copiar manualmente"></textarea>`;
+  $('#scoring').hidden=true;document.querySelector('.lead').hidden=true;r.hidden=false;
+  W2=makeWheel($('#rw'),true,'b');setVals(W2);
+  $('#rt').focus({preventScroll:true});window.scrollTo(0,0);
+}
+
+function toForm(){
+  $('#result').hidden=true;$('#scoring').hidden=false;document.querySelector('.lead').hidden=false;
+  buildLive();window.scrollTo(0,0);$('#ft').focus({preventScroll:true});
+}
+
+document.addEventListener('change',e=>{
+  if(!e.target.matches('.pk input'))return;
+  const all=[...document.querySelectorAll('.pk input')],c=all.filter(x=>x.checked).length;
+  all.forEach(x=>{x.disabled=!x.checked&&c>=3});
+  $('#pm').textContent=c==0?'Aún no marcaste ninguna.':c>=3?'Elegiste 3 áreas. Desmarca una si quieres cambiar.':`${c} de 3 áreas elegidas.`;
+});
+
+let printed=false;addEventListener('beforeprint',()=>{printed=true});
+document.addEventListener('click',async e=>{
+  const b=e.target.closest('#copy,#print,#edit,#redo,#gomiss');if(!b)return;
+  if(b.id==='gomiss'){const i=+b.dataset.i;$('#a'+i+'-1').focus();document.querySelectorAll('#fields fieldset')[i].scrollIntoView({block:'center'})}else if(b.id==='copy'){
+    const t=summary();
+    try{await navigator.clipboard.writeText(t);$('#cm').textContent='Resumen copiado. Pégalo donde quieras o envíaselo a tu coach.'}
+    catch(_){const r=$('#raw');r.value=t;r.hidden=false;r.focus();r.select();$('#cm').textContent='No pude copiar automáticamente. El texto quedó seleccionado: cópialo con Ctrl+C (o Cmd+C).'}
+  }else if(b.id==='print'){
+    printed=false;try{window.print()}catch(_){}
+    setTimeout(()=>{if(!printed)$('#cm').textContent='Desde esta pantalla no pude abrir la impresión. Haz una captura de pantalla o usa “Copiar resumen para mi sesión”.'},700);
+  }else if(b.id==='edit'){toForm()}
+  else if(b.id==='redo'){
+    if(!b.dataset.sure){
+      b.dataset.sure='1';b.textContent='Confirmar: borrar todo';$('#cm').textContent='Toca de nuevo para confirmar que quieres borrar todas tus respuestas.';
+      clearTimeout(rt);rt=setTimeout(()=>{if(b.isConnected){delete b.dataset.sure;b.textContent='Borrar todo y empezar de nuevo';$('#cm').textContent=''}},5000);return;
+    }
+    clearTimeout(rt);V.fill(null);$('#form').reset();
+    document.querySelectorAll('#fields fieldset').forEach(f=>f.removeAttribute('data-miss'));
+    $('#cnt').textContent='0 de 8 respondidas';$('#go').setAttribute('aria-disabled','true');$('#err').textContent='';
+    $('#cap').textContent='Elige un número y tu rueda empezará a formarse.';
+    toForm();
+  }
+});
+</script>
+</body>
+</html>
